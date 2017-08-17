@@ -10,6 +10,7 @@ function create() {
 
     game.world.setBounds(0,0,3000,3000);
 
+    game.physics.startSystem(Phaser.Physics.P2JS);
 
     background = game.add.sprite(100,100, 'backgroundImage');
     cropRect = new Phaser.Rectangle(378,0,64,64);

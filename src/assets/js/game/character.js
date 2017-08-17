@@ -6,7 +6,7 @@
 
 
 function drawCharacter(){
-    character = game.add.sprite(0,0, 'characterImage');
+    character = game.add.sprite(50,50, 'characterImage');
     character.animations.add('walkUp', [0,1,2]);
     character.animations.add('walkDown', [3,4,3,5]);
     character.animations.add('walkRight', [6,7,6,8]);
@@ -18,29 +18,31 @@ function drawCharacter(){
     character.animations.add('stayLeft', [9]);
 
     character.animationSpeed = 5;
-    character.walkingSpeed = 2;
+    character.moveSpeed = 300;
     character.direction = 'down';
     character.isWalking = false;
     var scale = 2;
+
+    game.physics.p2.enable(character);
 
     character.scale.setTo(scale, scale);
 
     character.go = function(direction){
         switch(direction){
             case 'up':
-                this.y -= this.walkingSpeed;
+                this.body.moveUp(this.moveSpeed);
                 this.animations.play('walkUp', this.animationSpeed, true);
                 break;
             case 'down':
-                this.y += this.walkingSpeed;
+                this.body.moveDown(this.moveSpeed);
                 this.animations.play('walkDown', this.animationSpeed, true);
                 break;
             case 'right':
-                this.x += this.walkingSpeed;
+                this.body.moveRight(this.moveSpeed);
                 this.animations.play('walkRight', this.animationSpeed, true);
                 break;
             case 'left':
-                this.x -= this.walkingSpeed;
+                this.body.moveLeft(this.moveSpeed);
                 this.animations.play('walkLeft', this.animationSpeed, true);
                 break;
         }
@@ -65,6 +67,8 @@ function drawCharacter(){
 
 
     character.update = function(){
+        this.body.setZeroVelocity();
+
         if (this.isWalking){
             this.go(this.direction);
         }else{
