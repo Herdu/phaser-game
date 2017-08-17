@@ -14,7 +14,7 @@ gulp.task('serve', ['sass','copy','js','html'], function() {
     });
 
     gulp.watch("src/index.html", ['html']);
-    gulp.watch("src/assets/img/*", ['copy']);
+    gulp.watch("src/assets/img/**/*", ['copy']);
     gulp.watch("src/assets/style/*.scss", ['sass']);
     gulp.watch("src/assets/js/**/*.js", ['js']);
     gulp.watch("**/*.css").on('change', browserSync.reload);
@@ -31,8 +31,8 @@ gulp.task('sass', function() {
 });
 
 gulp.task('copy', function() {
-    return gulp.src("src/assets/img/*")
-        .pipe(gulp.dest("app/assets/img/"))
+    return gulp.src("src/assets/img/**/*")
+        .pipe(gulp.dest("app/assets/img"))
         .pipe(browserSync.stream());
 });
 

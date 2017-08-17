@@ -1,2 +1,9 @@
 car.png
 https://opengameart.org/content/2d-pixel-car-side-view
+
+
+seven kingdoms package:
+https://opengameart.org/content/seven-kingdoms
+
+main chartacter:
+https://opengameart.org/content/main-rpg-character-pokemon-like
