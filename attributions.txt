@@ -7,3 +7,15 @@ https://opengameart.org/content/seven-kingdoms
 
 main chartacter:
 https://opengameart.org/content/main-rpg-character-pokemon-like
+
+background:
+https://opengameart.org/content/bevouliin-free-fence-game-background-for-game-developers
+
+blocks:
+https://opengameart.org/content/stone-blocks
+
+fire:
+https://opengameart.org/content/camp-fire-animation-for-rpgs-finished
+
+lava:
+https://opengameart.org/content/2-seamless-lava-tiles-lava-4png

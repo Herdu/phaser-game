@@ -6,7 +6,7 @@
 
 
 function drawCharacter(){
-    character = game.add.sprite(50,50, 'characterImage');
+    character = game.add.sprite(200,50, 'characterImage');
     character.animations.add('walkUp', [0,1,2]);
     character.animations.add('walkDown', [3,4,3,5]);
     character.animations.add('walkRight', [6,7,6,8]);
@@ -24,23 +24,18 @@ function drawCharacter(){
     var scale = 2;
 
     game.physics.p2.enable(character);
+    character.body.fixedRotation = true;
+    character.body.damping = 0.5;
+
 
     character.scale.setTo(scale, scale);
 
     character.go = function(direction){
         switch(direction){
-            case 'up':
-                this.body.moveUp(this.moveSpeed);
-                this.animations.play('walkUp', this.animationSpeed, true);
-                break;
-            case 'down':
-                this.body.moveDown(this.moveSpeed);
-                this.animations.play('walkDown', this.animationSpeed, true);
-                break;
             case 'right':
                 this.body.moveRight(this.moveSpeed);
                 this.animations.play('walkRight', this.animationSpeed, true);
-                break;
+                 break;
             case 'left':
                 this.body.moveLeft(this.moveSpeed);
                 this.animations.play('walkLeft', this.animationSpeed, true);
@@ -50,12 +45,6 @@ function drawCharacter(){
 
     character.stay = function(direction) {
         switch(direction){
-            case 'up':
-                this.animations.play('stayUp', this.animationSpeed, true);
-                break;
-            case 'down':
-                this.animations.play('stayDown', this.animationSpeed, true);
-                break;
             case 'right':
                 this.animations.play('stayRight', this.animationSpeed, true);
                 break;
@@ -67,13 +56,41 @@ function drawCharacter(){
 
 
     character.update = function(){
-        this.body.setZeroVelocity();
+        //this.body.setZeroVelocity();
 
         if (this.isWalking){
             this.go(this.direction);
         }else{
             this.stay(this.direction);
         }
+
+    }
+
+     character.checkIfCanJump = function() {
+
+        var result = false;
+
+        for (var i=0; i < game.physics.p2.world.narrowphase.contactEquations.length; i++)
+        {
+            var c = game.physics.p2.world.narrowphase.contactEquations[i];
+
+            if (c.bodyA === character.body.data || c.bodyB === character.body.data)
+            {
+                var d = p2.vec2.dot(c.normalA, yAxis);
+
+                if (c.bodyA === character.body.data)
+                {
+                    d *= -1;
+                }
+
+                if (d > 0.5)
+                {
+                    result = true;
+                }
+            }
+        }
+
+        return result;
 
     }
 
